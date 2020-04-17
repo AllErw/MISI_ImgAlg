@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="delay_and_sum.cpp">
+      <Filter>Code</Filter>
+    </ClCompile>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>Code</Filter>
+    </ClCompile>
+    <ClCompile Include="DMAS.cpp">
+      <Filter>Code</Filter>
+    </ClCompile>
+    <ClCompile Include="kSpace.cpp">
+      <Filter>Code</Filter>
+    </ClCompile>
+    <ClCompile Include="MISI_ImgAlg.cpp">
+      <Filter>Code</Filter>
+    </ClCompile>
+    <ClCompile Include="SLSC.cpp">
+      <Filter>Code</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Code</Filter>
+    </ClCompile>
+    <ClCompile Include="support_scripts.cpp">
+      <Filter>Code</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="delay_and_sum.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="DMAS.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="kSpace.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="MISI_ImgAlg.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="SLSC.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="support_scripts.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="MISI_ImgAlg.def" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Code">
+      <UniqueIdentifier>{9cbcb677-1afd-45a2-b792-fef55ab7e3af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers">
+      <UniqueIdentifier>{70209ec9-6637-402c-9f82-cafbb0841ef1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

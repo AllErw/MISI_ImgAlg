@@ -30,6 +30,7 @@
 *.exe
 *.out
 *.app
+*.user
 ReadMe.txt
 x64/Release/MISI_ImgAlg.log
 x64/Release/MISI_ImgAlg.pgd
