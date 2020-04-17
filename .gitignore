@@ -30,3 +30,17 @@
 *.exe
 *.out
 *.app
+ReadMe.txt
+x64/Release/MISI_ImgAlg.log
+x64/Release/MISI_ImgAlg.pgd
+x64/Release/MISI_ImgAlg.tlog/CL.command.1.tlog
+x64/Release/MISI_ImgAlg.tlog/CL.read.1.tlog
+x64/Release/MISI_ImgAlg.tlog/CL.write.1.tlog
+x64/Release/MISI_ImgAlg.tlog/link.command.1.tlog
+x64/Release/MISI_ImgAlg.tlog/link.delete.1.tlog
+x64/Release/MISI_ImgAlg.tlog/link.read.1.tlog
+x64/Release/MISI_ImgAlg.tlog/link.write.1.tlog
+x64/Release/MISI_ImgAlg.tlog/MISI_ImgAlg.lastbuildstate
+x64/Release/MISI_ImgAlg.tlog/MISI_ImgAlg.write.1u.tlog
+x64/Release/vc142.pdb
+x64/Release/MISI_ImgAlg.vcxproj.FileListAbsolute.txt
