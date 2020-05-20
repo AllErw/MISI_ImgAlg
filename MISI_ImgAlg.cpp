@@ -130,12 +130,24 @@ __declspec(dllexport) void DMnS_1rec_free_pos(	double* rf_data, double* source_l
 
 
 
+//==========================================================================================================================
+//
+// Supporting scripts:
+//
+//==========================================================================================================================
+
 __declspec(dllexport) void Detect_envelope( double *image, int Nx, int Ny, int Nz)
 {
 	Compute_envelope_FFTW(image,Nx,Ny,Nz);
 	return;
 }
 
+__declspec(dllexport) void PulseCompChirp(double* in, double dur, double fmin, double fmax, double fsamp,
+										  double Tukpar, int Nt, int Nscan, double* out)
+{
+	PCChirp(in, dur, fmin, fmax, fsamp, Tukpar, Nt, Nscan, out);
+	return;
+}
 
 
 

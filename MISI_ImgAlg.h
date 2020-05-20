@@ -126,6 +126,14 @@ __declspec(dllexport) void Detect_envelope( double *image, int Nx, int Ny, int N
 }
 #endif
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+	__declspec(dllexport) void PulseCompChirp(double* in, double dur, double fmin, double fmax, double fsamp,
+		double Tukpar, int Nt, int Nscan, double* out);
+#ifdef __cplusplus
+}
+#endif
 
 
 
