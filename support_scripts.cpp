@@ -90,20 +90,11 @@ void PCChirp(double* in, double dur, double fmin, double fmax, double fsamp,
 		}
 	}
 
-	// Cross-correlation for pulse compression:
-	/*for (scnt = 0; scnt < Nscan; scnt++) {
-		for (tcnt = 0; tcnt < Nt; tcnt++) {
-			for (tCcnt = 0; tCcnt < min(Nchirp, Nt - tcnt); tCcnt++) {
-				out[tcnt + scnt*Nt] += in[tcnt+tCcnt + scnt*Nt] * chirp[tCcnt];
-			}
-		}
-	}*/
-
 	// Cross-correlation for pulse compression, frequency domain:
 	// 1. Create variables, allocate memory, create FFTW plans:
 	fftw_complex *input, *INPUT, *OUTPUT, *CHIRP;
 	fftw_plan	  p_in, p_chirp, p_out;
-	CHIRP = (fftw_complex*)fftw_malloc(sizeof(fftw_complex) * (Nt+Nchirp-1));
+	CHIRP = (fftw_complex*)fftw_malloc(sizeof(fftw_complex) * (Nt + Nchirp - 1));
 	input = (fftw_complex*)fftw_malloc(sizeof(fftw_complex) * (Nt + Nchirp - 1));
 	INPUT = (fftw_complex*)fftw_malloc(sizeof(fftw_complex) * (Nt + Nchirp - 1));
 	OUTPUT = (fftw_complex*)fftw_malloc(sizeof(fftw_complex) * (Nt + Nchirp - 1));
@@ -134,6 +125,8 @@ void PCChirp(double* in, double dur, double fmin, double fmax, double fsamp,
 		}
 		fftw_execute(p_out);				// compute ifft(IN*CHIRP)
 		for (tcnt = 0; tcnt < Nt; tcnt++) { // extract correct part of cross-correlation
+			// in theory, the commented-out line below should be correct. In practice, 
+			// however, OUTPUT seems to be time-reversed and temporally offset... :S
 			//out[tcnt + scnt * Nt] = OUTPUT[Nchirp-1+tcnt][0] / (1.0*(Nt+Nchirp-1));
 			out[tcnt + scnt * Nt] = OUTPUT[Nt - tcnt][0] / (1.0 * (Nt + Nchirp - 1));
 		}
