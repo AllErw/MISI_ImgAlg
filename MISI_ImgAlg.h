@@ -135,6 +135,14 @@ extern "C" {
 }
 #endif
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+	__declspec(dllexport) void PulseCompAny(double* in, int Nt, int Nscan, double* signature, int Nchirp, double* out);
+#ifdef __cplusplus
+}
+#endif
+
 
 
 

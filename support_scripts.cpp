@@ -134,3 +134,51 @@ void PCChirp(double* in, double dur, double fmin, double fmax, double fsamp,
 
 	return;
 }
+
+void PCAny(double* in, int Nt, int Nscan, double* signature, int Nchirp, double* out) {
+	int scnt, tcnt;
+
+	// Cross-correlation for pulse compression, frequency domain:
+	// 1. Create variables, allocate memory, create FFTW plans:
+	fftw_complex* input, * INPUT, * OUTPUT, * CHIRP;
+	fftw_plan	  p_in, p_chirp, p_out;
+	CHIRP = (fftw_complex*)fftw_malloc(sizeof(fftw_complex) * (Nt + Nchirp - 1));
+	input = (fftw_complex*)fftw_malloc(sizeof(fftw_complex) * (Nt + Nchirp - 1));
+	INPUT = (fftw_complex*)fftw_malloc(sizeof(fftw_complex) * (Nt + Nchirp - 1));
+	OUTPUT = (fftw_complex*)fftw_malloc(sizeof(fftw_complex) * (Nt + Nchirp - 1));
+	for (tcnt = 0; tcnt < Nt + Nchirp - 1; tcnt++) {
+		CHIRP[tcnt][0] = 0.0; CHIRP[tcnt][1] = 0.0;
+		input[tcnt][0] = 0.0; input[tcnt][1] = 0.0;
+		INPUT[tcnt][0] = 0.0; INPUT[tcnt][1] = 0.0;
+		OUTPUT[tcnt][0] = 0.0; OUTPUT[tcnt][1] = 0.0;
+	}
+	p_chirp = fftw_plan_dft_1d(Nt + Nchirp - 1, CHIRP, CHIRP, FFTW_FORWARD, FFTW_ESTIMATE);
+	p_in = fftw_plan_dft_1d(Nt + Nchirp - 1, input, INPUT, FFTW_FORWARD, FFTW_ESTIMATE);
+	p_out = fftw_plan_dft_1d(Nt + Nchirp - 1, OUTPUT, OUTPUT, FFTW_FORWARD, FFTW_ESTIMATE);
+
+	// 2. compute fft(chirp(end:-1:1)):
+	for (tcnt = 0; tcnt < Nchirp; tcnt++) {
+		CHIRP[tcnt][0] = signature[Nchirp - tcnt - 1];
+	}
+	fftw_execute(p_chirp);
+
+	// 3. Perform cross-correlation in freq dom:
+	for (scnt = 0; scnt < Nscan; scnt++) {	// loop over all A-scans
+		for (tcnt = 0; tcnt < Nt; tcnt++) {	// extract A-scan from "in"
+			input[tcnt][0] = in[tcnt + scnt * Nt];
+		}
+		fftw_execute(p_in);					// compute fft(in)
+		for (tcnt = 0; tcnt < Nt + Nchirp - 1; tcnt++) { // compute IN*CHIRP
+			complex_mult(INPUT[tcnt], CHIRP[tcnt], OUTPUT[tcnt]);
+		}
+		fftw_execute(p_out);				// compute ifft(IN*CHIRP)
+		for (tcnt = 0; tcnt < Nt; tcnt++) { // extract correct part of cross-correlation
+			// in theory, the commented-out line below should be correct. In practice, 
+			// however, OUTPUT seems to be time-reversed and temporally offset... :S
+			//out[tcnt + scnt * Nt] = OUTPUT[Nchirp-1+tcnt][0] / (1.0*(Nt+Nchirp-1));
+			out[tcnt + scnt * Nt] = OUTPUT[Nt - tcnt][0] / (1.0 * (Nt + Nchirp - 1));
+		}
+	}
+
+	return;
+}

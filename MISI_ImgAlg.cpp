@@ -149,6 +149,12 @@ __declspec(dllexport) void PulseCompChirp(double* in, double dur, double fmin, d
 	return;
 }
 
+__declspec(dllexport) void PulseCompAny(double* in, int Nt, int Nscan, double* signature, int Nchirp, double* out)
+{
+	PCAny(in, Nt, Nscan, signature, Nchirp, out);
+	return;
+}
+
 
 
 

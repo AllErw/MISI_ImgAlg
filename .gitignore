@@ -45,3 +45,5 @@ x64/Release/MISI_ImgAlg.tlog/MISI_ImgAlg.lastbuildstate
 x64/Release/MISI_ImgAlg.tlog/MISI_ImgAlg.write.1u.tlog
 x64/Release/vc142.pdb
 x64/Release/MISI_ImgAlg.vcxproj.FileListAbsolute.txt
+*.log
+*.pgc
